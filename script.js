@@ -74,11 +74,14 @@ const MovieListItem = React.createClass({
 });
 
 
-
+const createMovieItem = function(oneMovie){
+	return (
+		React.createElement(MovieListItem, {key: oneMovie.id, movie:oneMovie})
+	)
+}
 
 const MoviesList = React.createClass({
 		propTypes: {
-//		movies: React.PropTypes.array.isRequired,
 		movies: React.PropTypes.arrayOf(
 			React.PropTypes.shape({
 				title: React.PropTypes.string.isRequired,
@@ -90,11 +93,7 @@ const MoviesList = React.createClass({
 	render: function () {
 		return (
 			React.createElement('ul', {}, 
-				this.props.movies.map(function(oneMovie){
-					return (
-						React.createElement(MovieListItem, {key: oneMovie.id, movie:oneMovie})
-					)
-				})
+				this.props.movies.map(createMovieItem)
 			)
 		);
 	},
